@@ -1,0 +1,9 @@
+-include add_numbers.dep
+add_numbers.lo: /home/owllog/Projects/php.m/add_numbers.c
+	$(LIBTOOL) --mode=compile $(CC) -I. -I/home/owllog/Projects/php.m $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)   -DZEND_COMPILE_DL_EXT=1 -c /home/owllog/Projects/php.m/add_numbers.c -o add_numbers.lo  -MMD -MF add_numbers.dep -MT add_numbers.lo
+$(phplibdir)/add_numbers.la: ./add_numbers.la
+	$(LIBTOOL) --mode=install cp ./add_numbers.la $(phplibdir)
+
+./add_numbers.la: $(shared_objects_add_numbers) $(ADD_NUMBERS_SHARED_DEPENDENCIES)
+	$(LIBTOOL) --mode=link $(CC) -shared $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS) $(LDFLAGS)  -o $@ -export-dynamic -avoid-version -prefer-pic -module -rpath $(phplibdir) $(EXTRA_LDFLAGS) $(shared_objects_add_numbers) $(ADD_NUMBERS_SHARED_LIBADD)
+
